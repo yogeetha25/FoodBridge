@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-paper font-body text-ink antialiased; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  :focus-visible { outline: 2px solid #1F6F4A; outline-offset: 2px; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply bg-leaf-600 text-white hover:bg-leaf-700; }
+  .btn-secondary { @apply border border-mist-200 bg-white text-ink hover:bg-mist-100; }
+  .btn-accent { @apply bg-turmeric-400 text-ink hover:bg-turmeric-300; }
+  .btn-danger { @apply bg-chilli-600 text-white hover:bg-chilli-500; }
+  .btn-ghost { @apply text-leaf-700 hover:bg-leaf-50; }
+  /* 16px on phones: iOS Safari zooms the page when a focused field has a smaller font. */
+  .input { @apply w-full rounded-lg border border-mist-200 bg-white px-3 py-2 text-base placeholder:text-mist-400 sm:text-sm focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200; }
+  .label { @apply mb-1 block text-sm font-medium; }
+  .card { @apply rounded-xl border border-mist-200 bg-white; }
+  .th { @apply px-4 py-3 text-left text-xs font-semibold text-mist-500; }
+  .td { @apply px-4 py-3 text-sm; }
+
+  /* The "match ticket": a stub with the score, a perforated edge, and the reasons. */
+  .ticket { position: relative; display: flex; overflow: hidden; border-radius: 14px; border: 1px solid #D3DCD3; background: #fff; }
+  .ticket-stub { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 108px; padding: 16px 12px; color: #fff; background: #1F6F4A; }
+  .ticket-perf { position: relative; width: 0; border-left: 2px dashed #B5D8BE; }
+  .ticket-perf::before, .ticket-perf::after { content: ''; position: absolute; left: -9px; width: 16px; height: 16px; border-radius: 9999px; background: #F3F6F1; border: 1px solid #D3DCD3; }
+  .ticket-perf::before { top: -9px; }
+  .ticket-perf::after { bottom: -9px; }
+}
+
+/* Comfortable touch targets (>= 44px) on touch screens only; desktop layout is unchanged. */
+@media (pointer: coarse) {
+  .btn { min-height: 44px; }
+  select.input, input.input[type='datetime-local'], input.input[type='time'] { min-height: 44px; }
+}
+/* Notched phones: keep fixed UI clear of the home indicator / rounded corners. */
+.safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+
+.leaflet-container { font-family: inherit; border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
